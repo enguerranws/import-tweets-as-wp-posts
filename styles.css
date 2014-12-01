@@ -1,0 +1,36 @@
+/*
+  CSS Styles for Tweets to posts WP plugin
+ */
+
+.results {
+    background: #fff;
+}
+.updated {
+    display: none;
+}
+
+.results .result > div, #headResults > div{
+    width: 20%;
+    float: left;
+    box-sizing: border-box;
+    padding: 10px;
+    overflow: hidden;
+}
+.results .result {
+    border-top: 1px solid #eee;
+}
+.results.loading {
+    background: url('ajax-loader.gif') no-repeat center center;
+}
+.results .result:after {
+  content:"";
+  display:table;
+  clear:both;
+}
+.results .result img {
+    max-width: 100%;
+    width: 120px;
+}
+.results .result .buttons .button {
+    margin: 10px;
+}

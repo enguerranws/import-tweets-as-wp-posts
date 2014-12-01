@@ -1,0 +1,246 @@
+<?php
+
+/*
+  Plugin Name: Tweets to Posts
+  Plugin URI: http://www.enguerranweiss.fr
+  Description: Get a tweets list (Ajax way, based on Tweetie.js) from a request (hashtag, user, free request) and add their content to your own Wordpress :)
+  Version: 1.0
+  Author: Enguerran Weiss
+  Author URI: http://www.enguerranweiss.fr
+ */
+
+
+/* -----------------------------------------------------------------------------
+ *  Init functions
+  ---------------------------------------------------------------------------- */
+
+add_action('admin_init', 'tweets_to_posts_feed_init');
+add_action('admin_menu', 'tweets_to_posts_feed_menu');
+add_action('admin_menu', 'tweets_to_posts_options_page');
+
+add_filter('tweets_to_posts_options_page_render', 'tweets_to_posts_register_options');
+
+
+
+/* -----------------------------------------------------------------------------
+ *  WP Ajax stuff
+  ---------------------------------------------------------------------------- */
+
+add_action("wp_ajax_tweets_to_posts_insertPost", "tweets_to_posts_insertPost");
+add_action("wp_ajax_nopriv_tweets_to_posts_insertPost", "tweets_to_posts_insertPost");
+
+add_action("wp_ajax_tweets_to_posts_api_call", "tweets_to_posts_api_call");
+add_action("wp_ajax_nopriv_tweets_to_posts_api_call", "tweets_to_posts_api_call");
+
+
+add_action("wp_ajax_tweets_to_posts_rejectPost", "tweets_to_posts_rejectPost");
+add_action("wp_ajax_nopriv_tweets_to_posts_rejectPost", "tweets_to_posts_rejectPost");
+
+add_action("wp_ajax_tweets_to_posts_getAllPostSlug", "tweets_to_posts_getAllPostSlug");
+add_action("wp_ajax_nopriv_itweets_to_posts_getAllPostSlug", "tweets_to_posts_getAllPostSlug");
+
+
+
+
+/* -----------------------------------------------------------------------------
+ *  Declare functions
+  ---------------------------------------------------------------------------- */
+
+
+function tweets_to_posts_getAllPostSlug() { // Returns an array of all Tweets ID (to check dupes)
+
+  $args = array( 'posts_per_page' => -1, "post_type" => get_option('tweets_to_posts_post_type'));
+  $posts = get_posts($args);
+  $ids = array();
+  foreach ($posts as $post) {
+      $ids[] = $post->post_name;
+  }
+  echo json_encode($ids);
+  die();
+}
+
+
+function checkAPIsettings() { // Check if Twitter API settings are filled
+  
+  if(get_option('tweets_to_posts_ck') === '' || get_option('tweets_to_posts_cs') === '' || get_option('tweets_to_posts_at') === '' || get_option('tweets_to_posts_as') === ''){
+    return false;
+  }
+  else {
+    return true;
+  }
+  die();
+}
+
+function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
+
+    // Getting tweet data from front
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $id = $_POST['id'];
+    $author = $_POST['author'];
+    $imgSrc = $_POST['imgSrc'];
+    $postType = $_POST['postType'];
+
+    // Creating new post
+    $my_post = array(
+      'post_name'     => $id,
+      'post_title'    => $title,
+      'post_content'  => $content,
+      'post_status'   => 'publish',
+      'tags_input'    => $author,
+      'post_author'   => 1,
+      'post_type'     => $postType,
+      'post_category' => array( 2 )
+    );
+
+    $post_ID = wp_insert_post($my_post);
+    
+    // updating post meta
+    // if a media is detected, add its source url
+    if($imgSrc){
+      add_post_meta( $post_ID, 'media_url', $imgSrc, true ) || update_post_meta( $post_ID, 'media_url', $imgSrc ); 
+    }
+
+    // Create and upload thumbnail 
+    $upload_dir = wp_upload_dir();
+    $image_data = file_get_contents($image_url);
+    $filename = basename($image_url);
+    if(wp_mkdir_p($upload_dir['path']))
+        $file = $upload_dir['path'] . '/' . $filename;
+    else
+        $file = $upload_dir['basedir'] . '/' . $filename;
+    file_put_contents($file, $image_data);
+
+    $wp_filetype = wp_check_filetype($filename, null );
+    $attachment = array(
+        'post_mime_type' => $wp_filetype['type'],
+        'post_title' => sanitize_file_name($filename),
+        'post_content' => '',
+        'post_status' => 'inherit'
+    );
+    $attach_id = wp_insert_attachment( $attachment, $file, $post_ID );
+    require_once(ABSPATH . 'wp-admin/includes/image.php');
+    $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
+    wp_update_attachment_metadata( $attach_id, $attach_data );
+
+    set_post_thumbnail( $post_ID, $attach_id );
+
+    echo 'ok';
+    die();
+}
+function tweets_to_posts_rejectPost(){ // Reject post : insert
+    
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $id = $_POST['id'];
+    $author = $_POST['author'];
+   
+
+
+    $my_post = array(
+      'post_name'     => $id,
+      'post_title'    => $title,
+      'post_content'  => $content,
+      'post_status'   => 'publish',
+      'tags_input'    => $author,
+      'post_author'   => 1,
+      'post_category' => array( 3 )
+    );
+
+    wp_insert_post($my_post);
+    
+    echo 'ok';
+    die();
+}
+
+function tweets_to_posts_feed_init() {
+
+    wp_enqueue_script('tweets_to_posts_feed_tweetie', plugins_url('/tweetie.min.js', __FILE__));
+    wp_register_script('tweets_to_posts_feed_tweetie', plugins_url('/tweetie.min.js', __FILE__), 'jquery');
+    
+}
+
+
+
+function tweets_to_posts_feed_menu() {
+   
+    $page = add_menu_page(
+            __('Twitter to Posts', 'tweets_to_posts'), // The Menu Title
+            __('Twitter to Posts', 'tweets_to_posts'), // The Page title
+            'manage_options', // The capability required for access to this item
+            'tweets_to_posts_feed', // the slug to use for the page in the URL
+            'tweets_to_posts_feed_admin',  // The function to call to render the page
+            "dashicons-format-gallery",59 // Position
+    );
+
+    /* Using registered $page handle to hook script load */
+    add_action('admin_print_styles-' . $page, 'tweets_to_posts_feed_styles');
+    add_action( 'admin_init', 'tweets_to_posts_register_options' );
+}
+
+function tweets_to_posts_feed_styles() {
+    /*
+     * It will be called only on your plugin admin page, enqueue our script here
+     */
+
+    wp_enqueue_script('tweets_to_posts_feed_script', plugins_url('/script.js', __FILE__));
+    wp_enqueue_style('style', plugins_url('/styles.css', __FILE__));
+}
+
+
+/* -----------------------------------------------------------------------------
+ *  Render the admin page
+  ---------------------------------------------------------------------------- */
+
+function tweets_to_posts_feed_admin() {
+    
+    wp_enqueue_script('tweets_to_posts_feed_script', plugins_url('/script.js', __FILE__));
+    wp_register_script('tweets_to_posts_feed_script', plugins_url('/script.js', __FILE__), 'jquery');
+
+    require_once(dirname(__FILE__) . '/admin.php');
+     
+}
+
+
+/* -----------------------------------------------------------------------------
+ *  Call to the Tweet API file
+  ---------------------------------------------------------------------------- */
+
+
+function tweets_to_posts_api_call(){
+
+    require_once(dirname(__FILE__) ."/api/tweet.php"); // Path to twitteroauth library
+    die();
+}
+
+
+/* -----------------------------------------------------------------------------
+ *  Plugin Page options
+  ---------------------------------------------------------------------------- */
+
+
+function tweets_to_posts_options_page() {
+  add_options_page('Tweets to Posts', 'Tweets to Posts', 'manage_options', 'tweets-to-posts', 'tweets_to_posts_options_page_render');
+
+  
+}
+function tweets_to_posts_options_page_render(){
+  require_once(dirname(__FILE__) . '/options.php');
+
+}
+
+function tweets_to_posts_register_options() { //register our settings
+  
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_query_type' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_query' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_post_type' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_exclude_rt' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_exclude_replies' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_ck' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cs' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_at' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_as' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_number' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_only_images' );
+}
+
