@@ -83,17 +83,19 @@ function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
     $postType = get_option('tweets_to_posts_post_type');
     $cat = intval(get_option('tweets_to_posts_cat'));
     $template = get_option('tweets_to_posts_title_template');
-    
+    $date = $_POST['date'];
     // If template selected, construct the title 
-    // if($template){
-    //   switch($template){
-    //     case 0:
-    //       $title = 
-    //       break;
-
-    //   }
-    // }
-
+    if($template !== ''){
+        $templateParams = array('/%a%/', '/%d%/');
+        $templateVals = array($author, $date);
+        $customTitle = preg_replace( $templateParams, $templateVals, $template);
+        
+      
+     
+      
+      
+    }
+    $title = $customTitle ? $customTitle : $title;
 
     // Creating new post
     $my_post = array(
@@ -257,6 +259,8 @@ function tweets_to_posts_register_options() { //register our settings
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_as' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_number' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_only_images' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_title_template' );
+
 }
 
 

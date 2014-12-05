@@ -103,6 +103,12 @@
           ?>
           </select></td>
         </tr>
+         <tr valign="top">
+        <th scope="row">Use a custom title ?</th>
+        <td><input type="text" placeholder="" name="tweets_to_posts_title_template" value="<?php echo esc_attr( get_option('tweets_to_posts_title_template') ); ?>" />
+            <p>You case use Tweet date (%d%) and Tweet (%a%) author to customize your title</p>
+            </td>
+        </tr>
       </table>
     <?php submit_button(); ?>
 
