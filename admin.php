@@ -7,7 +7,10 @@
     ajaxGetTweets.exclude_replies = '<?php echo get_option( 'tweets_to_posts_exclude_replies', '' ) ?>';
     ajaxGetTweets.number = '<?php echo get_option( 'tweets_to_posts_number', '' ) ?>';
     ajaxGetTweets.only_images = '<?php echo get_option( 'tweets_to_posts_only_images', '' ) ?>';
+
 </script>
+
+
 
 <div class="updated">
 

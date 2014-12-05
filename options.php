@@ -87,11 +87,15 @@
         </tr>
         <tr valign="top">
         <th scope="row">Category to feed :</th>
-        <td> <select name="tweets_to_posts_post_type">
+        <td> <select name="tweets_to_posts_cat">
           <?php 
               
-            
-            $terms = get_terms('category');
+            $args = array(
+             
+              'hide_empty'               => 0
+
+            ); 
+            $terms = get_categories($args);
 
             foreach ($terms as $term) { ?>
               <option value="<?php echo $term->term_id; ?>" <?php if(esc_attr( get_option('tweets_to_posts_cat') ) === $term->term_id){ echo 'selected'; } ?> ><?php echo $term->name; ?></option>

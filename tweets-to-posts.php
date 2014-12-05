@@ -80,7 +80,20 @@ function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
     $id = $_POST['id'];
     $author = $_POST['author'];
     $imgSrc = $_POST['imgSrc'];
-    $postType = $_POST['postType'];
+    $postType = get_option('tweets_to_posts_post_type');
+    $cat = intval(get_option('tweets_to_posts_cat'));
+    $template = get_option('tweets_to_posts_title_template');
+    
+    // If template selected, construct the title 
+    // if($template){
+    //   switch($template){
+    //     case 0:
+    //       $title = 
+    //       break;
+
+    //   }
+    // }
+
 
     // Creating new post
     $my_post = array(
@@ -90,7 +103,8 @@ function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
       'post_status'   => 'publish',
       'tags_input'    => $author,
       'post_author'   => 1,
-      'post_type'     => $postType
+      'post_type'     => $postType,
+      'post_category' => array($cat)
     );
 
     $post_ID = wp_insert_post($my_post);
