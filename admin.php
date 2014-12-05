@@ -16,7 +16,7 @@
 </div>
 
 <div class="wrap">
-    <h2>Tweets to Wordpress Posts</h2>
+    <h2><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
 
    
 

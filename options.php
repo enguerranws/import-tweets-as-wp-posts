@@ -3,9 +3,8 @@
     
 </script>
 
-
 <div class="wrap">
-    <h2>Tweets to Posts plugin options</h2>
+    <h2><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
 
    <form method="post" action="options.php">
    <?php settings_fields( 'tweets_to_posts-settings-group' ); ?>
@@ -30,8 +29,9 @@
         <td><input type="text" placeholder="Your access secret" name="tweets_to_posts_as" value="<?php echo esc_attr( get_option('tweets_to_posts_as') ); ?>" /></td>
         </tr>
     </table>
+    <hr>
 
-   <h3>Plugin settings</h3>
+   <h3>Tweets query options</h3>
 
     <table class="form-table">
         <tr valign="top">
@@ -48,17 +48,7 @@
         <th scope="row">Query text :</th>
         <td><input type="text" placeholder="Don't type # or @, just the query." name="tweets_to_posts_query" value="<?php echo esc_attr( get_option('tweets_to_posts_query') ); ?>" /></td>
         </tr>
-        <tr valign="top">
-        <th scope="row">Post type to feed :</th>
-        <td> <select name="tweets_to_posts_post_type">
-          <?php 
-            $types = get_post_types(array('public'   => true));
-            foreach ($types as $type) { ?>
-              <option value="<?php echo $type; ?>" <?php if(esc_attr( get_option('tweets_to_posts_post_type') ) === $type){ echo 'selected'; } ?> ><?php echo $type; ?></option>
-            <?php }
-          ?>
-          </select></td>
-        </tr>
+        
          <tr valign="top">
         <th scope="row">Only fetch tweets with images ?</th>
         <td> <select name="tweets_to_posts_only_images">
@@ -81,7 +71,35 @@
         <td><input type="number" placeholder="Default is 30" name="tweets_to_posts_number" value="<?php echo esc_attr( get_option('tweets_to_posts_number') ); ?>" /></td>
         </tr>
     </table>
-    
+    <hr>
+    <h3>Feed options</h3>
+    <table class="form-table">
+      <tr valign="top">
+        <th scope="row">Post type to feed :</th>
+        <td> <select name="tweets_to_posts_post_type">
+          <?php 
+            $types = get_post_types(array('public'   => true));
+            foreach ($types as $type) { ?>
+              <option value="<?php echo $type; ?>" <?php if(esc_attr( get_option('tweets_to_posts_post_type') ) === $type){ echo 'selected'; } ?> ><?php echo $type; ?></option>
+            <?php }
+          ?>
+          </select></td>
+        </tr>
+        <tr valign="top">
+        <th scope="row">Category to feed :</th>
+        <td> <select name="tweets_to_posts_post_type">
+          <?php 
+              
+            
+            $terms = get_terms('category');
+
+            foreach ($terms as $term) { ?>
+              <option value="<?php echo $term->term_id; ?>" <?php if(esc_attr( get_option('tweets_to_posts_cat') ) === $term->term_id){ echo 'selected'; } ?> ><?php echo $term->name; ?></option>
+            <?php }
+          ?>
+          </select></td>
+        </tr>
+      </table>
     <?php submit_button(); ?>
 
 </form>

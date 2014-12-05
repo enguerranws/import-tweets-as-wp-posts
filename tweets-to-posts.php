@@ -13,6 +13,7 @@
 /* -----------------------------------------------------------------------------
  *  Init functions
   ---------------------------------------------------------------------------- */
+add_action( 'init', 'create_t2p_pt_rejects' );
 
 add_action('admin_init', 'tweets_to_posts_feed_init');
 add_action('admin_menu', 'tweets_to_posts_feed_menu');
@@ -49,7 +50,7 @@ add_action("wp_ajax_nopriv_itweets_to_posts_getAllPostSlug", "tweets_to_posts_ge
 
 function tweets_to_posts_getAllPostSlug() { // Returns an array of all Tweets ID (to check dupes)
 
-  $args = array( 'posts_per_page' => -1, "post_type" => get_option('tweets_to_posts_post_type'));
+  $args = array( 'posts_per_page' => -1, "post_type" => array( get_option('tweets_to_posts_post_type'), 't2p_reject' ));
   $posts = get_posts($args);
   $ids = array();
   foreach ($posts as $post) {
@@ -89,8 +90,7 @@ function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
       'post_status'   => 'publish',
       'tags_input'    => $author,
       'post_author'   => 1,
-      'post_type'     => $postType,
-      'post_category' => array( 2 )
+      'post_type'     => $postType
     );
 
     $post_ID = wp_insert_post($my_post);
@@ -103,8 +103,8 @@ function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
 
     // Create and upload thumbnail 
     $upload_dir = wp_upload_dir();
-    $image_data = file_get_contents($image_url);
-    $filename = basename($image_url);
+    $image_data = file_get_contents($imgSrc);
+    $filename = basename($imgSrc);
     if(wp_mkdir_p($upload_dir['path']))
         $file = $upload_dir['path'] . '/' . $filename;
     else
@@ -144,7 +144,7 @@ function tweets_to_posts_rejectPost(){ // Reject post : insert
       'post_status'   => 'publish',
       'tags_input'    => $author,
       'post_author'   => 1,
-      'post_category' => array( 3 )
+      'post_type'     => 't2p_reject'
     );
 
     wp_insert_post($my_post);
@@ -234,6 +234,7 @@ function tweets_to_posts_register_options() { //register our settings
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_query_type' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_query' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_post_type' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cat' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_exclude_rt' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_exclude_replies' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_ck' );
@@ -242,5 +243,23 @@ function tweets_to_posts_register_options() { //register our settings
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_as' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_number' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_only_images' );
+}
+
+
+/* -----------------------------------------------------------------------------
+ *  Register private post type for rejects 
+  ---------------------------------------------------------------------------- */
+
+function create_t2p_pt_rejects() {
+  register_post_type( 't2p_reject',
+    array(
+      'labels' => array(
+        'name' => __( 'T2P rejects' ),
+        'singular_name' => __( 'T2P rejects' )
+      ),
+      'public' => false,
+      'has_archive' => false
+    )
+  );
 }
 

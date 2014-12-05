@@ -131,7 +131,7 @@ var ajaxGetTweets = {
                 var author = $that.attr('data-author');
                 console.log('ok deny');
                 var data = {
-                    'action': 'tweetFeed_insertPost',
+                    'action': 'tweets_to_posts_rejectPost',
                     'id': id,
                     'title': title,
                     'content': content,
