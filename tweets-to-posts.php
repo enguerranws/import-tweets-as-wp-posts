@@ -247,18 +247,18 @@ function tweets_to_posts_options_page_render(){
 
 function tweets_to_posts_register_options() { //register our settings
   
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_query_type' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_query' );
+  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_query_type' );
+  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_query' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_post_type' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cat' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_exclude_rt' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_exclude_replies' );
+  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_exclude_rt' );
+  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_exclude_replies' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_ck' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cs' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_at' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_as' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_number' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_only_images' );
+  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_number' );
+  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_only_images' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_title_template' );
 
 }
