@@ -46,7 +46,7 @@ var ajaxGetTweets = {
                         username: ajaxGetTweets.query,
                         count: ajaxGetTweets.number,
                         postType: ajaxGetTweets.post_type?ajaxGetTweets.post_type:'post',
-                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-primary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
+                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
                     }
                     break;
                 case "hashtag":
@@ -57,7 +57,7 @@ var ajaxGetTweets = {
                         username: null,
                         count: ajaxGetTweets.number,
                         postType: ajaxGetTweets.post_type?ajaxGetTweets.post_type:'post',
-                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-primary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
+                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
                     }
                     break;
                 case "free":
@@ -68,7 +68,7 @@ var ajaxGetTweets = {
                         username: null,
                         count: ajaxGetTweets.number,
                         postType: ajaxGetTweets.post_type?ajaxGetTweets.post_type:'post',
-                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="date">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-primary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
+                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="date">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
                     }
                     break;
             }
