@@ -3,7 +3,7 @@
 /*
   Plugin Name: Tweets to Posts
   Plugin URI: http://www.enguerranweiss.fr
-  Description: Get a tweets list (Ajax way, based on Tweetie.js) from a request (hashtag, user, free request) and add their content to your own Wordpress :)
+  Description: Get a tweets list from a request (hashtag, user, free request) and add their content to your own Wordpress :)
   Version: 1.0
   Author: Enguerran Weiss
   Author URI: http://www.enguerranweiss.fr
@@ -13,6 +13,8 @@
 /* -----------------------------------------------------------------------------
  *  Init functions
   ---------------------------------------------------------------------------- */
+
+
 add_action( 'init', 'create_t2p_pt_rejects' );
 
 add_action('admin_init', 'tweets_to_posts_feed_init');
@@ -224,7 +226,7 @@ function tweets_to_posts_feed_admin() {
 
 
 function tweets_to_posts_api_call(){
-
+    
     require_once(dirname(__FILE__) ."/api/tweet.php"); // Path to twitteroauth library
     die();
 }

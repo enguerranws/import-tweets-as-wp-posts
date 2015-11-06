@@ -13,6 +13,7 @@
 </div>
 <div class="wrap">
   <h2><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
+  <?php if(checkAPIsettings()){ ?>
   <h3>Tweets query options</h3>
   <form method="post" action="options.php" class="options-custom">
     
@@ -58,7 +59,7 @@
 </form>
 
 <h3>List of last Twitter posts for the query : "<?php echo get_option( 'tweets_to_posts_query', '' ) ?>"</h3>
-<?php if(checkAPIsettings()){ ?>
+
 <div id="headResults">
 <div class="manage-column column-image"><strong>Image</strong></div>
 <div class="manage-column column-auteur"><strong>Author</strong></div>

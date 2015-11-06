@@ -159,7 +159,7 @@ var ajaxGetTweets = {
                 ajaxGetTweets.nbPage++;
                 jQuery(container).after('<div class="results" id="results-'+ajaxGetTweets.nbPage+'" />');
                 container = '#results-'+ajaxGetTweets.nbPage;
-                ajaxGetTweets.getPostIdsAndRun(container,ajaxGetTweets.defaultTag,ajaxGetTweets.lastID);
+                ajaxGetTweets.getPostIdsAndRun(container,ajaxGetTweets.defaultTag,ajaxGetTweets.lastID+1);
             });
         }
 }

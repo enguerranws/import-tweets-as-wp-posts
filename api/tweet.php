@@ -39,15 +39,7 @@
             exit;
         }
     }
-	
-    /**
-     * Gets connection with user Twitter account
-     * @param  String $cons_key     Consumer Key
-     * @param  String $cons_secret  Consumer Secret Key
-     * @param  String $oauth_token  Access Token
-     * @param  String $oauth_secret Access Secrete Token
-     * @return Object               Twitter Session
-     */
+	    
     function getConnectionWithToken($cons_key, $cons_secret, $oauth_token, $oauth_secret)
     {
         $connection = new TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_secret);
@@ -106,13 +98,13 @@
     $tweets = $connection->get($url, $params);
 
 
-
+    
     // Return JSON Object
     header('Content-Type: application/json');
     
 
     $tweets = json_encode( $tweets);
     
-    if(CACHE_ENABLED) file_put_contents($cache_path . $cache_key, $tweets);
+    //if(CACHE_ENABLED) file_put_contents($cache_path . $cache_key, $tweets);
    
     echo $tweets;
