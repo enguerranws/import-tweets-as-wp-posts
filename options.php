@@ -7,8 +7,8 @@
     <h2><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
 
    <form method="post" action="options.php">
-   <?php settings_fields( 'tweets_to_posts_api-settings-group' ); ?>
-    <?php do_settings_sections( 'tweets_to_posts_api-settings-group' ); ?>
+   <?php settings_fields( 'tweets_to_posts-settings-group' ); ?>
+    <?php do_settings_sections( 'tweets_to_posts-settings-group' ); ?>
     <h3>Twitter API settings :</h3>
    <table class="form-table">
         

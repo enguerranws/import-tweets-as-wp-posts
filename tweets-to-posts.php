@@ -63,7 +63,7 @@ function tweets_to_posts_getAllPostSlug() { // Returns an array of all Tweets ID
 }
 
 
-function checkAPIsettings() { // Check if Twitter API settings are filled
+function tweets_to_posts_check_api_settings() { // Check if Twitter API settings are filled
   
   if(get_option('tweets_to_posts_ck') === '' || get_option('tweets_to_posts_cs') === '' || get_option('tweets_to_posts_at') === '' || get_option('tweets_to_posts_as') === ''){
     return false;
@@ -202,7 +202,7 @@ function tweets_to_posts_feed_styles() {
      */
 
     wp_enqueue_script('tweets_to_posts_feed_script', plugins_url('/script.js', __FILE__));
-    wp_enqueue_style('style', plugins_url('/styles.css', __FILE__));
+  
 }
 
 
@@ -214,7 +214,7 @@ function tweets_to_posts_feed_admin() {
     
     wp_enqueue_script('tweets_to_posts_feed_script', plugins_url('/script.js', __FILE__));
     wp_register_script('tweets_to_posts_feed_script', plugins_url('/script.js', __FILE__), 'jquery');
-
+    wp_enqueue_style('tweets_to_posts_feed_styles', plugins_url('/styles.css', __FILE__));
     require_once(dirname(__FILE__) . '/admin.php');
      
 }
@@ -226,7 +226,7 @@ function tweets_to_posts_feed_admin() {
 
 
 function tweets_to_posts_api_call(){
-    
+
     require_once(dirname(__FILE__) ."/api/tweet.php"); // Path to twitteroauth library
     die();
 }
@@ -249,19 +249,20 @@ function tweets_to_posts_options_page_render(){
 
 function tweets_to_posts_register_options() { //register our settings
   
-  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_query_type' );
-  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_query' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_post_type' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cat' );
-  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_exclude_rt' );
-  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_exclude_replies' );
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_query_type' );
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_query' );
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_exclude_replies' );
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_number' );
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_only_images' );
+  
+
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_title_template' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_ck' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cs' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_at' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_as' );
-  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_number' );
-  register_setting( 'tweets_to_posts_query-settings-group', 'tweets_to_posts_only_images' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_title_template' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_post_type' );
+  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cat' );
 
 }
 

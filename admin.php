@@ -3,25 +3,30 @@
   ajaxGetTweets.query = '<?php echo get_option( 'tweets_to_posts_query', '' ) ?>';
   ajaxGetTweets.query_type = '<?php echo get_option( 'tweets_to_posts_query_type', '' ) ?>';
   ajaxGetTweets.post_type = '<?php echo get_option( 'tweets_to_posts_post_type', '' ) ?>';
-  ajaxGetTweets.exlude_rt = '<?php echo get_option( 'tweets_to_posts_exclude_rt', '' ) ?>';
+  
   ajaxGetTweets.exclude_replies = '<?php echo get_option( 'tweets_to_posts_exclude_replies', '' ) ?>';
   ajaxGetTweets.number = '<?php echo get_option( 'tweets_to_posts_number', '' ) ?>';
   ajaxGetTweets.only_images = '<?php echo get_option( 'tweets_to_posts_only_images', '' ) ?>';
 </script>
+
 <div class="updated">
   <p>Media added !</p>
 </div>
 <div class="wrap">
-  <h2><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
-  <?php if(checkAPIsettings()){ ?>
-  <h3>Tweets query options</h3>
-  <form method="post" action="options.php" class="options-custom">
+  <h2 class="align-center"><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
+  <?php if(tweets_to_posts_check_api_settings()){ ?>
+
+
+  <h3><?php _e('Tweets query options', 'tweets-to-posts') ?></h3>
+
+
+  <form method="post" action="options.php" class="options-custom" id="queryOptions">
     
     <?php
-      settings_fields( 'tweets_to_posts_query-settings-group' ); ?>
-    <?php do_settings_sections( 'tweets_to_posts_query-settings-group' ); ?>
+      settings_fields( 'tweets_to_posts-admin-settings-group' ); ?>
+    <?php do_settings_sections( 'tweets_to_posts-admin-settings-group' ); ?>
     <div class="option">
-      <label>Query type :</label>
+      <label><?php _e('Query type:', 'tweets-to-posts') ?></label>
       <select name="tweets_to_posts_query_type">
         <option value="free" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'free'){ echo 'selected'; } ?>>Query (will search in tweets content)</option>
         <option value="user" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'user'){ echo 'selected'; } ?> >User (find tweets from an user)</option>

@@ -1,9 +1,7 @@
-/*
-  CSS Styles for Tweets to posts WP plugin
- */
 
 .results {
     background: #fff;
+    border-radius: 4px;
 }
 .updated {
     display: none;
@@ -36,9 +34,11 @@
 }
 .options-custom {
   background: #E5E5E5;
+  border-radius: 4px;
 
   padding: 20px;
 }
+
 .toplevel_page_tweets_to_posts_feed .option{
   margin: 10px;
   display: inline-block;
@@ -46,8 +46,21 @@
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
+.toplevel_page_tweets_to_posts_feed .option.hidden {
+  display: none;
+}
 .toplevel_page_tweets_to_posts_feed .option label {
   font-weight: bold;
   display: inline-block;
   width: 200px;
+}
+
+.align-center {
+  text-align: center !important;
+}
+.align-center p {
+  text-align: center;
+}
+.hidden {
+  display: none;
 }
