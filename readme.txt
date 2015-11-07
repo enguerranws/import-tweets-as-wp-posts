@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: enguerranws
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=BQNTS4S2PEQVN
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=enguerrandeep%40gmail%2ecom&lc=FR&item_name=Enguerran%20Weiss&item_number=wp%2dplugin%2dtweets%2dto%2dposts&no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
 Tags: twitter, tweets, content, videos, enguerranws, twitter api, wordpress feed
 Requires at least: 3.0.1
 Tested up to: 3.0.1
@@ -66,12 +66,12 @@ This section describes how to install the plugin and get it working.
 
 =How can I get a Twitter API key?=
 
-To use this plugin, you'll need to create a Twitter API key. Dealing with Twitter Developers Console can be a bit confusing, you need to : create a project, make the API data you need active and generate a public API key. Here's how to do that:
+To use this plugin, you'll need to create a Twitter API key. Dealing with Twitter Developers Console can be a bit confusing. Here's how to do that:
 1. Login to https://apps.twitter.com/ using your Twitter account
 2. Click on 'Create new app'
 3. Set up your Twitter app
 4. On your new app dashboard, click on Keys and access tokens : there you can find your Consumer Key and your Consumer Secret
-5. On the bottom of this pge, click on Create My access token and token secret
+5. On the bottom of this page, click on Create My access token and token secret
 6. Now that you have your Consumer Key, your Consumer Secret, your Access Token and your Access Token Secret copy them into the Tweets to Posts Settings page
 7. It's done, congrats :)
 

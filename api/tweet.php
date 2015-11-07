@@ -17,28 +17,28 @@
     $hashtag = filter_input(INPUT_GET, 'hashtag', FILTER_SANITIZE_SPECIAL_CHARS);
     $lastID = filter_input(INPUT_GET, 'lastID', FILTER_SANITIZE_SPECIAL_CHARS);
     $onlyImages = filter_input(INPUT_GET, 'onlyImages', FILTER_SANITIZE_SPECIAL_CHARS);
-	// if(CACHE_ENABLED) {
- //        // Generate cache key from query data
- //        $cache_key = md5(
- //            var_export(array($username, $number, $exclude_replies, $list_slug, $hashtag), true) . HASH_SALT
- //        );
+	if(CACHE_ENABLED) {
+        // Generate cache key from query data
+        $cache_key = md5(
+            var_export(array($username, $number, $exclude_replies, $list_slug, $hashtag), true) . HASH_SALT
+        );
     
- //        // Remove old files from cache dir
- //        $cache_path  = dirname(__FILE__) . '/cache/';
- //        foreach (glob($cache_path . '*') as $file) {
- //            if (filemtime($file) < time() - CACHE_LIFETIME) {
- //                unlink($file);
- //            }
- //        }
+        // Remove old files from cache dir
+        $cache_path  = dirname(__FILE__) . '/cache/';
+        foreach (glob($cache_path . '*') as $file) {
+            if (filemtime($file) < time() - CACHE_LIFETIME) {
+                unlink($file);
+            }
+        }
     
- //        // If cache file exists - return it
- //        if(file_exists($cache_path . $cache_key)) {
- //            header('Content-Type: application/json');
+        // If cache file exists - return it
+        if(file_exists($cache_path . $cache_key)) {
+            header('Content-Type: application/json');
     
- //            echo file_get_contents($cache_path . $cache_key);
- //            exit;
- //        }
- //    }
+            echo file_get_contents($cache_path . $cache_key);
+            exit;
+        }
+    }
 	    
     function getConnectionWithToken($cons_key, $cons_secret, $oauth_token, $oauth_secret)
     {
@@ -107,6 +107,6 @@
 
     $tweets = json_encode( $tweets);
     
-    //if(CACHE_ENABLED) file_put_contents($cache_path . $cache_key, $tweets);
+    if(CACHE_ENABLED) file_put_contents($cache_path . $cache_key, $tweets);
    
     echo $tweets;

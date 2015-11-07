@@ -172,7 +172,8 @@ function tweets_to_posts_rejectPost(){ // Reject post : insert
 }
 
 function tweets_to_posts_feed_init() {
-
+  
+    load_plugin_textdomain('tweets-to-posts', false, basename( dirname( __FILE__ ) ) . '/i18n' );
     wp_enqueue_script('tweets_to_posts_feed_tweetie', plugins_url('/tweetie.min.js', __FILE__));
     wp_register_script('tweets_to_posts_feed_tweetie', plugins_url('/tweetie.min.js', __FILE__), 'jquery');
     

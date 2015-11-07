@@ -9,9 +9,7 @@
   ajaxGetTweets.only_images = '<?php echo get_option( 'tweets_to_posts_only_images', '' ) ?>';
 </script>
 
-<div class="updated">
-  <p>Media added !</p>
-</div>
+
 <div class="wrap">
   <h2 class="align-center"><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
   <?php if(tweets_to_posts_check_api_settings()){ ?>
@@ -64,7 +62,9 @@
 </form>
 
 <h3><?php _e('List of last Twitter posts for the query:', 'tweets-to-posts') ?> "<?php echo get_option( 'tweets_to_posts_query', '' ) ?>"</h3>
-
+<div class="updated updated-custom">
+  <p>Media added !</p>
+</div>
 <div id="headResults">
 <div class="manage-column column-image"><strong><?php _e('Preview/thumbnail', 'tweets-to-posts') ?></strong></div>
 <div class="manage-column column-auteur"><strong><?php _e('Author username', 'tweets-to-posts') ?></strong></div>

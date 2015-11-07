@@ -73,20 +73,19 @@
       <hr>
        <h3><?php _e('How can I get a Twitter API key and access tokens?', 'tweets-to-posts') ?></h3>
     <p class="description">
-      <?php _e('To use this plugin, you\'ll need to create a Google Youtube API key. Dealing with Google Developers Console can be a bit confusing, you need to : create a project, make the API data you need active and generate a public API key. Here\'s how to do that:', 'tweets-to-posts') ?>
+      <?php _e('To use this plugin, you\'ll need to create a Twitter API key. Dealing with Twitter Developers Console can be a bit confusing. Here\'s how to do that:', 'tweets-to-posts') ?>
       
 
     </p>
     <ol>
-      <li><?php _e('Login to Google using your Google account.', 'tweets-to-posts') ?>
+      <li><?php _e('Login to https://apps.twitter.com/ using your Twitter account', 'tweets-to-posts') ?>
       </li>
-      <li><?php _e('Go to the <a target="_blank" href="https://console.developers.google.com/project">Developers Console > Projects</a>', 'tweets-to-posts') ?></li>
-      <li><?php _e('Click on "Create a project" (you\'ll need to give it a title and an ID)', 'tweets-to-posts') ?></li>
-      <li><?php _e('When your project his created, click on it on the project list', 'tweets-to-posts') ?></li>
-      <li><?php _e('Go to the section API and authentication > API, and search for YouTube Data API v3, and click on the button on the right to make this API active.', 'tweets-to-posts') ?></li>
-      <li><?php _e('Go to the Credentials section > Access to the public API anc click on the button "Make a key" > Server key', 'tweets-to-posts') ?></li>
-      <li><?php _e('On the next box, you\'ll need to tell on which domains you allow the use of your app (e.g. 127.0.0.1, www.mydomain.com, etc).', 'tweets-to-posts') ?></li>
-      <li><?php _e('Now it should have generated a API Key (e.g. AIzaFyD0aPCQjLFRbLnh4RKbVBlBgVCVSwjbFAg), copy-paste it on the box above.', 'tweets-to-posts') ?></li>
+      <li><?php _e('Click on "Create new app"', 'tweets-to-posts') ?></li>
+      
+      <li><?php _e('Set up your Twitter app', 'tweets-to-posts') ?></li>
+      <li><?php _e('On your new app dashboard, click on Keys and access tokens : there you can find your Consumer Key and your Consumer Secret', 'tweets-to-posts') ?></li>
+      <li><?php _e('On the bottom of this page, click on Create My access token and token secret', 'tweets-to-posts') ?></li>
+      <li><?php _e('Now that you have your Consumer Key, your Consumer Secret, your Access Token and your Access Token Secret copy them into the Tweets to Posts Settings page', 'tweets-to-posts') ?></li>
       <li><?php _e('It\'s done, congrats :)', 'tweets-to-posts') ?></li>
     </ol>
     <?php submit_button(); ?>
