@@ -3,7 +3,10 @@
   ajaxGetTweets.query = '<?php echo get_option( 'tweets_to_posts_query', '' ) ?>';
   ajaxGetTweets.query_type = '<?php echo get_option( 'tweets_to_posts_query_type', '' ) ?>';
   ajaxGetTweets.post_type = '<?php echo get_option( 'tweets_to_posts_post_type', '' ) ?>';
-  
+  ajaxGetTweets.trans = {};
+  ajaxGetTweets.trans.loading = '<?php _e('Loading...', 'tweets-to-posts') ?>';
+  ajaxGetTweets.trans.mediaAdded = '<?php _e('Post added !', 'tweets-to-posts') ?>';
+  ajaxGetTweets.trans.mediaRejected = '<?php _e('Tweet rejected !', 'tweets-to-posts') ?>';
   ajaxGetTweets.exclude_replies = '<?php echo get_option( 'tweets_to_posts_exclude_replies', '' ) ?>';
   ajaxGetTweets.number = '<?php echo get_option( 'tweets_to_posts_number', '' ) ?>';
   ajaxGetTweets.only_images = '<?php echo get_option( 'tweets_to_posts_only_images', '' ) ?>';
