@@ -7,6 +7,8 @@
   ajaxGetTweets.trans.loading = '<?php _e('Loading...', 'tweets-to-posts') ?>';
   ajaxGetTweets.trans.mediaAdded = '<?php _e('Post added !', 'tweets-to-posts') ?>';
   ajaxGetTweets.trans.mediaRejected = '<?php _e('Tweet rejected !', 'tweets-to-posts') ?>';
+  ajaxGetTweets.trans.approve = '<?php _e('Approve', 'tweets-to-posts') ?>';
+  ajaxGetTweets.trans.reject = '<?php _e('Deny', 'tweets-to-posts') ?>';
   ajaxGetTweets.exclude_replies = '<?php echo get_option( 'tweets_to_posts_exclude_replies', '' ) ?>';
   ajaxGetTweets.number = '<?php echo get_option( 'tweets_to_posts_number', '' ) ?>';
   ajaxGetTweets.only_images = '<?php echo get_option( 'tweets_to_posts_only_images', '' ) ?>';
@@ -56,8 +58,45 @@
       </select>
     </div>
     <div class="option">
-    <label><?php _e('Tweets number per page?', 'tweets-to-posts') ?></label>
-    <input type="number" placeholder="<?php _e('Default: 30', 'tweets-to-posts') ?>" name="tweets_to_posts_number" value="<?php echo esc_attr( get_option('tweets_to_posts_number') ); ?>" /></td>
+      <label><?php _e('Tweets number per page?', 'tweets-to-posts') ?></label>
+      <input type="number" placeholder="<?php _e('Default: 30', 'tweets-to-posts') ?>" name="tweets_to_posts_number" value="<?php echo esc_attr( get_option('tweets_to_posts_number') ); ?>" /></td>
+    </div>
+    <div class="option">
+      <label><?php _e('Post type to feed:', 'tweets-to-posts') ?></label>
+      <select id="updateCatOnChange" name="tweets_to_posts_post_type">
+        <?php 
+          $types = get_post_types(array('public'   => true));
+          foreach ($types as $type) { 
+            if($type === 'page' || $type === 'attachment'){
+              // do nothing
+              }
+              else {
+            ?>
+            <option value="<?php echo $type; ?>" <?php if(esc_attr( get_option('tweets_to_posts_post_type') ) === $type){ echo 'selected'; } ?> ><?php echo $type; ?></option>
+          <?php 
+          }
+        }
+        ?>
+      </select>
+    </div>
+    <div class="option" id="catsSelect">
+
+      <label><?php _e('Category to feed:', 'tweets-to-posts') ?></label>
+        <select name="tweets_to_posts_cat">
+          <?php 
+              
+            $args = array(
+             
+              'hide_empty'               => 0
+
+            ); 
+            $terms = get_categories($args);
+
+            foreach ($terms as $term) { ?>
+              <option value="<?php echo $term->term_id; ?>" <?php if(esc_attr( get_option('tweets_to_posts_cat') ) === $term->term_id){ echo 'selected'; } ?> ><?php echo $term->name; ?></option>
+            <?php }
+          ?>
+          </select>
     </div>
 
 
@@ -66,7 +105,7 @@
 
 <h3><?php _e('List of last Twitter posts for the query:', 'tweets-to-posts') ?> "<?php echo get_option( 'tweets_to_posts_query', '' ) ?>"</h3>
 <div class="updated updated-custom">
-  <p>Media added !</p>
+  <p></p>
 </div>
 <div id="headResults">
 <div class="manage-column column-image"><strong><?php _e('Preview/thumbnail', 'tweets-to-posts') ?></strong></div>

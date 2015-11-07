@@ -40,9 +40,10 @@ add_action("wp_ajax_tweets_to_posts_rejectPost", "tweets_to_posts_rejectPost");
 add_action("wp_ajax_nopriv_tweets_to_posts_rejectPost", "tweets_to_posts_rejectPost");
 
 add_action("wp_ajax_tweets_to_posts_getAllPostSlug", "tweets_to_posts_getAllPostSlug");
-add_action("wp_ajax_nopriv_itweets_to_posts_getAllPostSlug", "tweets_to_posts_getAllPostSlug");
+add_action("wp_ajax_nopriv_tweets_to_posts_getAllPostSlug", "tweets_to_posts_getAllPostSlug");
 
-
+add_action("wp_ajax_tweets_to_posts_getPostTypeCats", "tweets_to_posts_getPostTypeCats");
+add_action("wp_ajax_nopriv_tweets_to_posts_getPostTypeCats", "tweets_to_posts_getPostTypeCats");
 
 
 /* -----------------------------------------------------------------------------
@@ -73,7 +74,63 @@ function tweets_to_posts_check_api_settings() { // Check if Twitter API settings
   }
   die();
 }
+function tweets_to_posts_getPostTypeCats() { // Returns an array of all Youtube ID (to check dupes)
+  $type = $_POST['post_type'];
+  $taxs = get_object_taxonomies($type);
+  $results = array();
+  
+  
+  if(empty($taxs)){
+    echo 'empty';
+  }
+  else {
+    foreach ($taxs as $tax) {
+      if($tax === "post_tag" || $tax === "post_format"){
 
+      }
+      else {
+        $args = array(
+            'orderby'           => 'name', 
+            'order'             => 'ASC',
+            'hide_empty'        => false, 
+            'exclude'           => array(), 
+            'exclude_tree'      => array(), 
+            'include'           => array(),
+            'number'            => '', 
+            'fields'            => 'all', 
+            'slug'              => '',
+            'parent'            => '',
+            'hierarchical'      => true, 
+            'child_of'          => 0, 
+            'get'               => '', 
+            'name__like'        => '',
+            'description__like' => '',
+            'pad_counts'        => false, 
+            'offset'            => '', 
+            'search'            => '', 
+            'cache_domain'      => 'core'
+        );
+        $tax_terms = get_terms($tax, $args);
+       // var_dump($tax_terms);
+        foreach ($tax_terms as $tax_term) {
+          if($tax_term){
+            $object = new stdClass();
+            $object->id = $tax_term->term_id;
+            $object->name = $tax_term->name;
+            $results[] = $object;
+            
+          }
+          
+        }
+      }
+      
+      
+    }
+    $results = json_encode($results);
+      echo $results;
+  }
+  die();
+}
 function tweets_to_posts_insertPost(){ // Setting and calling wp_insert_post();
 
     // Getting tweet data from front
@@ -172,7 +229,7 @@ function tweets_to_posts_rejectPost(){ // Reject post : insert
 }
 
 function tweets_to_posts_feed_init() {
-  
+
     load_plugin_textdomain('tweets-to-posts', false, basename( dirname( __FILE__ ) ) . '/i18n' );
     wp_enqueue_script('tweets_to_posts_feed_tweetie', plugins_url('/tweetie.min.js', __FILE__));
     wp_register_script('tweets_to_posts_feed_tweetie', plugins_url('/tweetie.min.js', __FILE__), 'jquery');
@@ -255,15 +312,15 @@ function tweets_to_posts_register_options() { //register our settings
   register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_exclude_replies' );
   register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_number' );
   register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_only_images' );
-  
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_post_type' );
+  register_setting( 'tweets_to_posts-admin-settings-group', 'tweets_to_posts_cat' );
 
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_title_template' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_ck' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cs' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_at' );
   register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_as' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_post_type' );
-  register_setting( 'tweets_to_posts-settings-group', 'tweets_to_posts_cat' );
+
 
 }
 

@@ -34,36 +34,7 @@
    
     <h3><?php _e('Wordpress feed options:', 'tweets-to-posts') ?></h3>
     <table class="form-table">
-      <tr valign="top">
-        <th scope="row"><?php _e('Post type to feed:', 'tweets-to-posts') ?></th>
-        <td> <select name="tweets_to_posts_post_type">
-          <?php 
-            $types = get_post_types(array('public'   => true));
-            foreach ($types as $type) { ?>
-              <option value="<?php echo $type; ?>" <?php if(esc_attr( get_option('tweets_to_posts_post_type') ) === $type){ echo 'selected'; } ?> ><?php echo $type; ?></option>
-            <?php }
-          ?>
-          </select></td>
-        </tr>
-        <tr valign="top">
-        <th scope="row"><?php _e('Category to feed:', 'tweets-to-posts') ?></th>
-        <td> <select name="tweets_to_posts_cat">
-          <?php 
-              
-            $args = array(
-             
-              'hide_empty'               => 0
-
-            ); 
-            $terms = get_categories($args);
-
-            foreach ($terms as $term) { ?>
-              <option value="<?php echo $term->term_id; ?>" <?php if(esc_attr( get_option('tweets_to_posts_cat') ) === $term->term_id){ echo 'selected'; } ?> ><?php echo $term->name; ?></option>
-            <?php }
-          ?>
-          </select></td>
-        </tr>
-         <tr valign="top">
+      
         <th scope="row"><?php _e('Use a custom title?', 'tweets-to-posts') ?></th>
         <td><input type="text" placeholder="<?php _e('e.g : Last tweet by %a%, posted on %d%', 'tweets-to-posts') ?>" name="tweets_to_posts_title_template" value="<?php echo esc_attr( get_option('tweets_to_posts_title_template') ); ?>" />
             <p><?php _e('You can use Tweet date (%d%) and Tweet (%a%) author to customize your title', 'tweets-to-posts') ?></p>

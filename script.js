@@ -1,7 +1,10 @@
 jQuery(document).ready(function(){
         
         ajaxGetTweets.init(ajaxGetTweets.query);
-        
+        jQuery('#updateCatOnChange').on('change', function() {
+
+            ajaxGetTweets.updateCategories('#updateCatOnChange');
+        });
 });
 
 var ajaxGetTweets = {
@@ -31,6 +34,42 @@ var ajaxGetTweets = {
                
             });
         },
+        updateCategories: function(el) {
+        var type = jQuery(el).val();
+        var data = {
+            'action': 'tweets_to_posts_getPostTypeCats',
+            'post_type': type
+        };
+
+        jQuery.post(ajaxurl, data, function(response) {
+            console.log(response);
+            if (response === "empty") {
+                jQuery('#catsSelect').addClass('hidden');
+            } else {
+                jQuery('#catsSelect').removeClass('hidden');
+                jQuery('#catsSelect select').html(function() {
+                    var html = "";
+                    response = JSON.parse(response);
+
+                    for (var i = 0; i < response.length; i++) {
+                        if (ajaxGetYoutube.currentCat === response[i].id) {
+                            html += '<option selected value="' + response[i].id + '" >' + response[i].name + '</option>';
+                        } else {
+                            html += '<option value="' + response[i].id + '" >' + response[i].name + '</option>';
+                        }
+
+
+
+                    }
+                    return html;
+                });
+            }
+
+
+
+
+        });
+    },
         getTagFeed: function(container,tag,ids,lastID){
             var args = {};
             if(!container){
@@ -46,7 +85,7 @@ var ajaxGetTweets = {
                         username: ajaxGetTweets.query,
                         count: ajaxGetTweets.number,
                         postType: ajaxGetTweets.post_type?ajaxGetTweets.post_type:'post',
-                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
+                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">'+ ajaxGetTweets.trans.reject+'</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">'+ ajaxGetTweets.trans.approve+'</a></div></div>'
                     }
                     break;
                 case "hashtag":
@@ -57,7 +96,7 @@ var ajaxGetTweets = {
                         username: null,
                         count: ajaxGetTweets.number,
                         postType: ajaxGetTweets.post_type?ajaxGetTweets.post_type:'post',
-                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
+                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="nbLikes">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">'+ ajaxGetTweets.trans.reject+'</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">'+ ajaxGetTweets.trans.approve+'</a></div></div>'
                     }
                     break;
                 case "free":
@@ -68,7 +107,7 @@ var ajaxGetTweets = {
                         username: null,
                         count: ajaxGetTweets.number,
                         postType: ajaxGetTweets.post_type?ajaxGetTweets.post_type:'post',
-                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="date">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">Deny</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">Approve</a></div></div>'
+                        template: '<div class="result" data-id="{{id}}"><div class="thumb"><a href="{{url}}" target="_blank" >{{media}}</a></div><div>{{user_name}} ({{screen_name}})</div><div class="content">{{tweet}}</div><div class="date">{{date}}</div><div class="buttons"><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-content="  " class="btn-deny button button-secondary" href="#">'+ ajaxGetTweets.trans.reject+'</a><a data-id="{{id}}" data-src="{{media_url}}" data-author="{{user_name}}" data-account="{{twitter_name}}" data-content="" data-date="{{date}}" class="btn-approve button button-primary" href="#">'+ ajaxGetTweets.trans.approve+'</a></div></div>'
                     }
                     break;
             }
