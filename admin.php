@@ -28,57 +28,57 @@
     <div class="option">
       <label><?php _e('Query type:', 'tweets-to-posts') ?></label>
       <select name="tweets_to_posts_query_type">
-        <option value="free" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'free'){ echo 'selected'; } ?>>Query (will search in tweets content)</option>
-        <option value="user" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'user'){ echo 'selected'; } ?> >User (find tweets from an user)</option>
-        <option value="hash" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'hash'){ echo 'selected'; } ?> >Hashtag (find tweets with a hashtag)</option>
+        <option value="free" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'free'){ echo 'selected'; } ?>><?php _e('Query (will search in tweets content)', 'tweets-to-posts') ?></option>
+        <option value="user" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'user'){ echo 'selected'; } ?> ><?php _e('User (find tweets from an user)', 'tweets-to-posts') ?></option>
+        <option value="hash" <?php if(esc_attr( get_option('tweets_to_posts_query_type') ) === 'hash'){ echo 'selected'; } ?> ><?php _e('Hashtag (find tweets with a hashtag)', 'tweets-to-posts') ?></option>
       </select>
     </div>
     <div class="option">
-      <label>Query text :</label>
-      <input type="text" placeholder="Don't type # or @, just the query." name="tweets_to_posts_query" value="<?php echo esc_attr( get_option('tweets_to_posts_query') ); ?>" />
+      <label><?php _e('Query text:', 'tweets-to-posts') ?></label>
+      <input type="text" placeholder="<?php _e('Don\'t type # or @, just the query.', 'tweets-to-posts') ?>" name="tweets_to_posts_query" value="<?php echo esc_attr( get_option('tweets_to_posts_query') ); ?>" />
     </div>
     <div class="option">
-      <label>Only tweets with image ?</label>
+      <label><?php _e('Only tweets with image?', 'tweets-to-posts') ?></label>
       <select name="tweets_to_posts_only_images">
         
-        <option value="true" <?php if(esc_attr( get_option('tweets_to_posts_only_images') ) === true){ echo 'selected'; } ?> >Yes</option>
-        <option value="false" <?php if(esc_attr( get_option('tweets_to_posts_only_images') ) === false){ echo 'selected'; } ?> >No</option>
+        <option value="true" <?php if(esc_attr( get_option('tweets_to_posts_only_images') ) === true){ echo 'selected'; } ?> ><?php _e('Yes', 'tweets-to-posts') ?></option>
+        <option value="false" <?php if(esc_attr( get_option('tweets_to_posts_only_images') ) === false){ echo 'selected'; } ?> ><?php _e('No', 'tweets-to-posts') ?></option>
       </select>
     </div>
     <div class="option">
-      <label>Exclude replies ?</label>
+      <label><?php _e('Exclude replies?', 'tweets-to-posts') ?></label>
       
       <select name="tweets_to_posts_exclude_replies">
         
-        <option value="true" <?php if(esc_attr( get_option('tweets_to_posts_exclude_replies') ) === true){ echo 'selected'; } ?> >Yes</option>
-        <option value="false" <?php if(esc_attr( get_option('tweets_to_posts_exclude_replies') ) === false){ echo 'selected'; } ?> >No</option>
+        <option value="true" <?php if(esc_attr( get_option('tweets_to_posts_exclude_replies') ) === true){ echo 'selected'; } ?> ><?php _e('Yes', 'tweets-to-posts') ?></option>
+        <option value="false" <?php if(esc_attr( get_option('tweets_to_posts_exclude_replies') ) === false){ echo 'selected'; } ?> ><?php _e('No', 'tweets-to-posts') ?></option>
       </select>
     </div>
     <div class="option">
-    <label>Tweets number by page ?</label>
-    <input type="number" placeholder="Default is 30" name="tweets_to_posts_number" value="<?php echo esc_attr( get_option('tweets_to_posts_number') ); ?>" /></td>
+    <label><?php _e('Tweets number per page?', 'tweets-to-posts') ?></label>
+    <input type="number" placeholder="<?php _e('Default: 30', 'tweets-to-posts') ?>" name="tweets_to_posts_number" value="<?php echo esc_attr( get_option('tweets_to_posts_number') ); ?>" /></td>
     </div>
 
 
 <?php submit_button(); ?>
 </form>
 
-<h3>List of last Twitter posts for the query : "<?php echo get_option( 'tweets_to_posts_query', '' ) ?>"</h3>
+<h3><?php _e('List of last Twitter posts for the query:', 'tweets-to-posts') ?> "<?php echo get_option( 'tweets_to_posts_query', '' ) ?>"</h3>
 
 <div id="headResults">
-<div class="manage-column column-image"><strong>Image</strong></div>
-<div class="manage-column column-auteur"><strong>Author</strong></div>
-<div class="manage-column column-texte"><strong>Text</strong></div>
-<div class="manage-column column-date"><strong>Date</strong></div>
-<div class="manage-column column-action"><strong>Action</strong></div>
+<div class="manage-column column-image"><strong><?php _e('Preview/thumbnail', 'tweets-to-posts') ?></strong></div>
+<div class="manage-column column-auteur"><strong><?php _e('Author username', 'tweets-to-posts') ?></strong></div>
+<div class="manage-column column-texte"><strong><?php _e('Tweet text', 'tweets-to-posts') ?></strong></div>
+<div class="manage-column column-date"><strong><?php _e('Date', 'tweets-to-posts') ?></strong></div>
+<div class="manage-column column-action"><strong><?php _e('Action', 'tweets-to-posts') ?></strong></div>
 </div>
 <div id="results" class="results">
 </div>
 
-<a href="#" class="button button-primary" id="loadMore">Load previous medias</a>
+<a href="#" class="button button-primary" id="loadMore"><?php _e('Load more tweets', 'tweets-to-posts') ?></a>
 <?php
 } else { ?>
-<p>Your Twitter API access is not defined, go set it on the settings page.</p>
+<p><?php _e('Your Twitter API access is not defined, go set it on the settings page.', 'tweets-to-posts') ?></p>
 <?php
 }?>
 

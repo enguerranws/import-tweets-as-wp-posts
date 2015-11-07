@@ -9,33 +9,33 @@
    <form method="post" action="options.php">
    <?php settings_fields( 'tweets_to_posts-settings-group' ); ?>
     <?php do_settings_sections( 'tweets_to_posts-settings-group' ); ?>
-    <h3>Twitter API settings :</h3>
+    <h3><?php _e('Twitter API settings:', 'tweets-to-posts') ?></h3>
    <table class="form-table">
         
          <tr valign="top">
-        <th scope="row">Consumer key :</th>
-        <td><input type="text" placeholder="Your consumer key" name="tweets_to_posts_ck" value="<?php echo esc_attr( get_option('tweets_to_posts_ck') ); ?>" /></td>
+        <th scope="row"><?php _e('Twitter API Consumer key:', 'tweets-to-posts') ?></th>
+        <td><input type="text" placeholder="" name="tweets_to_posts_ck" value="<?php echo esc_attr( get_option('tweets_to_posts_ck') ); ?>" /></td>
         </tr>
           <tr valign="top">
-        <th scope="row">Consumer secret :</th>
-        <td><input type="text" placeholder="Your consumer secret" name="tweets_to_posts_cs" value="<?php echo esc_attr( get_option('tweets_to_posts_cs') ); ?>" /></td>
+        <th scope="row"><?php _e('Twitter API Consumer secret:', 'tweets-to-posts') ?></th>
+        <td><input type="text" placeholder="" name="tweets_to_posts_cs" value="<?php echo esc_attr( get_option('tweets_to_posts_cs') ); ?>" /></td>
         </tr>
           <tr valign="top">
-        <th scope="row">Access token :</th>
-        <td><input type="text" placeholder="Your access token" name="tweets_to_posts_at" value="<?php echo esc_attr( get_option('tweets_to_posts_at') ); ?>" /></td>
+        <th scope="row"><?php _e('Twitter API Access token:', 'tweets-to-posts') ?></th>
+        <td><input type="text" placeholder="" name="tweets_to_posts_at" value="<?php echo esc_attr( get_option('tweets_to_posts_at') ); ?>" /></td>
         </tr>
           <tr valign="top">
-        <th scope="row">Access secret :</th>
-        <td><input type="text" placeholder="Your access secret" name="tweets_to_posts_as" value="<?php echo esc_attr( get_option('tweets_to_posts_as') ); ?>" /></td>
+        <th scope="row"><?php _e('Twitter API Access secret:', 'tweets-to-posts') ?></th>
+        <td><input type="text" placeholder="" name="tweets_to_posts_as" value="<?php echo esc_attr( get_option('tweets_to_posts_as') ); ?>" /></td>
         </tr>
     </table>
     <hr>
 
    
-    <h3>Feed options</h3>
+    <h3><?php _e('Wordpress feed options:', 'tweets-to-posts') ?></h3>
     <table class="form-table">
       <tr valign="top">
-        <th scope="row">Post type to feed :</th>
+        <th scope="row"><?php _e('Post type to feed:', 'tweets-to-posts') ?></th>
         <td> <select name="tweets_to_posts_post_type">
           <?php 
             $types = get_post_types(array('public'   => true));
@@ -46,7 +46,7 @@
           </select></td>
         </tr>
         <tr valign="top">
-        <th scope="row">Category to feed :</th>
+        <th scope="row"><?php _e('Category to feed:', 'tweets-to-posts') ?></th>
         <td> <select name="tweets_to_posts_cat">
           <?php 
               
@@ -64,12 +64,31 @@
           </select></td>
         </tr>
          <tr valign="top">
-        <th scope="row">Use a custom title ?</th>
-        <td><input type="text" placeholder="" name="tweets_to_posts_title_template" value="<?php echo esc_attr( get_option('tweets_to_posts_title_template') ); ?>" />
-            <p>You case use Tweet date (%d%) and Tweet (%a%) author to customize your title</p>
+        <th scope="row"><?php _e('Use a custom title?', 'tweets-to-posts') ?></th>
+        <td><input type="text" placeholder="<?php _e('e.g : Last tweet by %a%, posted on %d%', 'tweets-to-posts') ?>" name="tweets_to_posts_title_template" value="<?php echo esc_attr( get_option('tweets_to_posts_title_template') ); ?>" />
+            <p><?php _e('You can use Tweet date (%d%) and Tweet (%a%) author to customize your title', 'tweets-to-posts') ?></p>
             </td>
         </tr>
       </table>
+      <hr>
+       <h3><?php _e('How can I get a Twitter API key and access tokens?', 'tweets-to-posts') ?></h3>
+    <p class="description">
+      <?php _e('To use this plugin, you\'ll need to create a Google Youtube API key. Dealing with Google Developers Console can be a bit confusing, you need to : create a project, make the API data you need active and generate a public API key. Here\'s how to do that:', 'tweets-to-posts') ?>
+      
+
+    </p>
+    <ol>
+      <li><?php _e('Login to Google using your Google account.', 'tweets-to-posts') ?>
+      </li>
+      <li><?php _e('Go to the <a target="_blank" href="https://console.developers.google.com/project">Developers Console > Projects</a>', 'tweets-to-posts') ?></li>
+      <li><?php _e('Click on "Create a project" (you\'ll need to give it a title and an ID)', 'tweets-to-posts') ?></li>
+      <li><?php _e('When your project his created, click on it on the project list', 'tweets-to-posts') ?></li>
+      <li><?php _e('Go to the section API and authentication > API, and search for YouTube Data API v3, and click on the button on the right to make this API active.', 'tweets-to-posts') ?></li>
+      <li><?php _e('Go to the Credentials section > Access to the public API anc click on the button "Make a key" > Server key', 'tweets-to-posts') ?></li>
+      <li><?php _e('On the next box, you\'ll need to tell on which domains you allow the use of your app (e.g. 127.0.0.1, www.mydomain.com, etc).', 'tweets-to-posts') ?></li>
+      <li><?php _e('Now it should have generated a API Key (e.g. AIzaFyD0aPCQjLFRbLnh4RKbVBlBgVCVSwjbFAg), copy-paste it on the box above.', 'tweets-to-posts') ?></li>
+      <li><?php _e('It\'s done, congrats :)', 'tweets-to-posts') ?></li>
+    </ol>
     <?php submit_button(); ?>
 
 </form>
