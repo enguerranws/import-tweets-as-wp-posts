@@ -1,21 +1,21 @@
 === Plugin Name ===
 Contributors: enguerranws
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=enguerrandeep%40gmail%2ecom&lc=FR&item_name=Enguerran%20Weiss&item_number=wp%2dplugin%2dtweets%2dto%2dposts&no_note=0&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest
-Tags: twitter, tweets, content, videos, enguerranws, twitter api, wordpress feed
+Tags: twitter, tweets, content, videos, enguerranws, twitter api, wordpress feed, import tweets, import twitter tweets
 Requires at least: 3.0.1
 Tested up to: 3.0.1
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Tweets to Posts lets you search for Tweets and add them quickly to your Wordpress website as posts (or any post type you want).
+Import Tweets as WP Posts lets you search for Tweets and add them quickly to your Wordpress website as posts (or any post type you want).
 
 == Description ==
 
 English
 _________________________
 
-**Tweets to Posts** is a simple plugin that allow you to search Tweets from the admin panel (with keywords, username or hashtag) and add them to your posts (you can choose a post type, a category).
+**Import Tweets as WP Posts** is a simple plugin that allow you to search Tweets from the admin panel (with keywords, username or hashtag) and add them to your posts (you can choose a post type, a category).
 
 It's a simple way :
 • to **feed your WordPress website with real content in minutes**
@@ -35,7 +35,7 @@ Available in French and English.
 Français
 _________________________
 
-**Tweets to Posts** est un plugin tout simple qui permet de **chercher des tweets depuis l'administration** de WordPress et de **les ajouter à son site rapidement**.
+**Import Tweets as WP Posts** est un plugin tout simple qui permet de **chercher des tweets depuis l'administration** de WordPress et de **les ajouter à son site rapidement**.
 
 Quelques utilisations :
 • **alimenter un site en quelques minutes avec du vrai contenu** venant de Twitter
@@ -72,7 +72,7 @@ To use this plugin, you'll need to create a Twitter API key. Dealing with Twitte
 3. Set up your Twitter app
 4. On your new app dashboard, click on Keys and access tokens : there you can find your Consumer Key and your Consumer Secret
 5. On the bottom of this page, click on Create My access token and token secret
-6. Now that you have your Consumer Key, your Consumer Secret, your Access Token and your Access Token Secret copy them into the Tweets to Posts Settings page
+6. Now that you have your Consumer Key, your Consumer Secret, your Access Token and your Access Token Secret copy them into the Import Tweets as WP Posts Settings page
 7. It's done, congrats :)
 
 

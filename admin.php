@@ -16,7 +16,7 @@
 
 
 <div class="wrap">
-  <h2 class="align-center"><img src="<?php echo plugins_url('', __FILE__); ?>/img/logo-t2p.png"></h2>
+  <h2 class="align-center">Import Tweets as WP Posts</h2>
   <?php if(tweets_to_posts_check_api_settings()){ ?>
 
 

@@ -1,6 +1,6 @@
-# Tweets to Posts Wordpress plugin
+# Import Tweets as WP Posts Wordpress plugin
 
-Tweets to Posts lets you search for Tweets and add them quickly to your Wordpress website as posts (or any post type you want).
+Import Tweets as WP Posts lets you search for Tweets and add them quickly to your Wordpress website as posts (or any post type you want).
 
 ## Description
 
@@ -9,7 +9,7 @@ _________________________
 English
 _________________________
 
-**Tweets to Posts** is a simple plugin that allow you to search Tweets from the admin panel (with keywords, username or hashtag) and add them to your posts (you can choose a post type, a category).
+**Import Tweets as WP Posts** is a simple plugin that allow you to search Tweets from the admin panel (with keywords, username or hashtag) and add them to your posts (you can choose a post type, a category).
 
 It's a simple way :
 * to **feed your WordPress website with real content in minutes**
@@ -31,7 +31,7 @@ _________________________
 Français
 _________________________
 
-**Tweets to Posts** est un plugin tout simple qui permet de **chercher des tweets depuis l'administration** de WordPress et de **les ajouter à son site rapidement**.
+**Import Tweets as WP Posts** est un plugin tout simple qui permet de **chercher des tweets depuis l'administration** de WordPress et de **les ajouter à son site rapidement**.
 
 Quelques utilisations :
 * **alimenter un site en quelques minutes avec du vrai contenu** venant de Twitter
@@ -66,7 +66,7 @@ To use this plugin, you'll need to create a Twitter API key. Dealing with Twitte
 3. Set up your Twitter app
 4. On your new app dashboard, click on Keys and access tokens : there you can find your Consumer Key and your Consumer Secret
 5. On the bottom of this page, click on Create My access token and token secret
-6. Now that you have your Consumer Key, your Consumer Secret, your Access Token and your Access Token Secret copy them into the Tweets to Posts Settings page
+6. Now that you have your Consumer Key, your Consumer Secret, your Access Token and your Access Token Secret copy them into the Import Tweets as WP Posts Settings page
 7. It's done, congrats :)
 
 

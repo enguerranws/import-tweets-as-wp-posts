@@ -1,7 +1,7 @@
 <?php
 
 /*
-  Plugin Name: Tweets to Posts
+  Plugin Name: Import Tweets as WP Posts
   Plugin URI: http://www.enguerranweiss.fr
   Description: Get a tweets list from a request (hashtag, user, free request) and add their content to your own Wordpress :)
   Version: 1.0
