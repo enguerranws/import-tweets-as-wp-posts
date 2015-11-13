@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=engue
 Tags: twitter, tweets, content, videos, enguerranws, twitter api, wordpress feed, import tweets, import twitter tweets
 Requires at least: 3.0.1
 Tested up to: 3.0.1
-Stable tag: 4.3
+Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,8 +12,8 @@ Import Tweets as WP Posts lets you search for Tweets and add them quickly to you
 
 == Description ==
 
-English
-_________________________
+
+*English*
 
 **Import Tweets as WP Posts** is a simple plugin that allow you to search Tweets from the admin panel (with keywords, username or hashtag) and add them to your posts (you can choose a post type, a category).
 
@@ -32,8 +32,9 @@ How does it work ?
 
 Available in French and English.
 
-Français
-_________________________
+
+
+*Français*
 
 **Import Tweets as WP Posts** est un plugin tout simple qui permet de **chercher des tweets depuis l'administration** de WordPress et de **les ajouter à son site rapidement**.
 
@@ -64,7 +65,7 @@ This section describes how to install the plugin and get it working.
 
 == Frequently Asked Questions ==
 
-=How can I get a Twitter API key?=
+= How can I get a Twitter API key? =
 
 To use this plugin, you'll need to create a Twitter API key. Dealing with Twitter Developers Console can be a bit confusing. Here's how to do that:
 1. Login to https://apps.twitter.com/ using your Twitter account

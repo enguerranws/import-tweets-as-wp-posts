@@ -42,7 +42,7 @@ var ajaxGetTweets = {
         };
 
         jQuery.post(ajaxurl, data, function(response) {
-            console.log(response);
+          
             if (response === "empty") {
                 jQuery('#catsSelect').addClass('hidden');
             } else {
@@ -187,7 +187,6 @@ var ajaxGetTweets = {
                 var content = $that.attr('data-content');
                 var imgSrc = $that.attr('data-src');
                 var author = $that.attr('data-author');
-                console.log('ok deny');
                 var data = {
                     'action': 'tweets_to_posts_rejectPost',
                     'id': id,
